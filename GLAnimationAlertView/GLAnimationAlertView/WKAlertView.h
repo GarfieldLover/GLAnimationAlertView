@@ -18,6 +18,28 @@
  */
 typedef void (^callBack)(MyWindowClick buttonIndex);
 
+typedef NS_ENUM(NSInteger, WKAlertViewStyle)
+{
+    /**
+     *
+     *  默认样式——成功
+     */
+    WKAlertViewStyleDefalut = 0,
+    /**
+     *  成功
+     */
+    WKAlertViewStyleSuccess,//成功
+    /**
+     *  失败
+     */
+    WKAlertViewStyleFail,//失败
+    /**
+     *  警告
+     */
+    WKAlertViewStyleWaring//警告
+};
+
+
 
 
 @protocol WKAlertViewDelegate <NSObject>
