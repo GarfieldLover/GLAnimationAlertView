@@ -7,29 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
-/**
- 状态类型
-
- - GLAlertViewStyleSuccess: 成功
- - GLAlertViewStyleFail: 失败
- - GLAlertViewStyleWaring: 警告
- */
-typedef NS_ENUM(NSInteger, GLAlertViewStyle) {
-    GLAlertViewStyleSuccess,
-    GLAlertViewStyleFail,
-    GLAlertViewStyleWaring
-};
+#import "GLAnimationAlertView/GLAnimationAlertViewDefine.h"
 
 
 @interface GLAlertView : UIView
 
-+ (instancetype)showAlertViewWithStyle:(WKAlertViewStyle)style
++ (instancetype)showAlertViewWithStyle:(GLAlertViewStyle)style
                                  title:(NSString *)title
                                 detail:(NSString *)detail
                       canleButtonTitle:(NSString *)canle
-                         okButtonTitle:(NSString *)ok
-                             callBlock:(callBack)callBack;
+                         okButtonTitle:(NSString *)ok;
 
 @end

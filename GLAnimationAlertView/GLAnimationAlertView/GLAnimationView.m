@@ -7,49 +7,78 @@
 //
 
 #import "GLAnimationView.h"
+#import "UIView+Sizes.h"
+
+@interface GLAnimationView ()
+
+@property (nonatomic, strong) NSMutableArray* showLayerArray;
+
+
+@end
 
 @implementation GLAnimationView
 
-- (void)layerInit
-{
-    
-    [_showLayerArray removeAllObjects];
-    switch (self.noticStyle) {
-            
-        case WKAlertViewNoticStyleFace:
-        {
-            [self initPathForRightShapeLayerWithFace];
-            [self initPathForWrongShapeLayerWithFace];
-            [self initPathForWaringShapeLayerWithFace];
-            break;
-        }
-        default:
-        case WKAlertViewNoticStyleClassic: {
-            [self initPathForRightShapeLayer];
-            [self initPathForWrongShapeLayer];
-            [self initPathForWaringShapeLayer];
-            break;
-        }
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.bounds = CGRectMake(0, 0, 100, 100);
+        self.backgroundColor = [UIColor whiteColor];
+        self.layer.cornerRadius = 10;
+        self.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.layer.shadowOffset = CGSizeMake(0, 5);
+        self.layer.shadowOpacity = 0.3f;
+        self.layer.shadowRadius = 10.0f;
+        
+        [self layerInit];
     }
-    
+    return self;
 }
-- (CAShapeLayer *)layerConfig
+
+- (void)isShowLayer:(BOOL)show
 {
+    
+        //strokeEnd
+        //通过对from，to赋值，可让贝塞尔动画从终点至起点，或起点至终点
+        NSNumber * from = show ? @0 : @1;
+        NSNumber * to = show ? @1 : @0;
+    
+        [self.layer removeAllAnimations];
+        [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:NSStringFromSelector(@selector(strokeEnd))];
+        animation.fromValue = from;
+        animation.toValue = to;
+        animation.duration = 0.5;
+        NSUInteger index = (NSUInteger)self.style;
+        CAShapeLayer * layer = [_showLayerArray objectAtIndex:index];
+        [layer addAnimation:animation forKey:NSStringFromSelector(@selector(strokeEnd))];
+        [self.layer addSublayer:layer];
+}
+
+
+- (void)layerInit {
+    self.showLayerArray = [NSMutableArray new];
+    
+    [self.showLayerArray removeAllObjects];
+    
+    [self initPathForRightShapeLayer];
+    [self initPathForWrongShapeLayer];
+    [self initPathForWaringShapeLayer];
+}
+
+- (CAShapeLayer *)layerConfig {
     CAShapeLayer * showLayer = [CAShapeLayer new];
     showLayer.fillColor = [UIColor clearColor].CGColor;
     showLayer.strokeColor = [UIColor clearColor].CGColor;
-    showLayer.lineWidth = _noticStyle == WKAlertViewNoticStyleClassic ? CLASSICLLINEWIDTH : FACELINEWIDTH;
+    showLayer.lineWidth = 3;
     return showLayer;
 }
 
-- (void)initPathForRightShapeLayer
-{
+- (void)initPathForRightShapeLayer {
     
     CAShapeLayer * showLayer = [self layerConfig];
     
-    
-    CGPoint pathCenter = CGPointMake(_logoView.frame.size.width/2, _logoView.frame.size.height/4);
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:pathCenter radius:Logo_Size startAngle:0 endAngle:M_PI*2 clockwise:YES];
+    CGPoint pathCenter = CGPointMake(self.width/2, self.height/4);
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:pathCenter radius:self.height/6 startAngle:0 endAngle:M_PI*2 clockwise:YES];
     
     path.lineCapStyle = kCGLineCapRound;
     path.lineJoinStyle = kCGLineJoinRound;
@@ -73,28 +102,27 @@
     [_showLayerArray addObject:showLayer];
 }
 
-- (void)initPathForWrongShapeLayer
-{
+- (void)initPathForWrongShapeLayer {
     
     CAShapeLayer * showLayer = [self layerConfig];
     
     
-    CGFloat x = _logoView.frame.size.width / 2 - Logo_Size;
-    CGFloat y = Logo_Size / 2.0;
+    CGFloat x = self.width / 2 - self.height/6;
+    CGFloat y = self.height/6 / 2.0;
     
     //圆角矩形
-    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(x, y, Logo_Size * 2, Logo_Size * 2) cornerRadius:5];
+    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(x, y, self.height/6 * 2, self.height/6 * 2) cornerRadius:5];
     path.lineCapStyle = kCGLineCapRound;
     path.lineJoinStyle = kCGLineJoinRound;
     
-    CGFloat space = Logo_Size / 2;
+    CGFloat space = self.height/6 / 2;
     //斜线1
     [path moveToPoint:CGPointMake(x + space, y + space)];
-    CGPoint p1 = CGPointMake(x + Logo_Size * 2 - space, y + Logo_Size * 2 - space);
+    CGPoint p1 = CGPointMake(x + self.height/6 * 2 - space, y + self.height/6 * 2 - space);
     [path addLineToPoint:p1];
     //斜线2
-    [path moveToPoint:CGPointMake(x + Logo_Size * 2 - space , y + space)];
-    CGPoint p2 = CGPointMake(x + space, y + Logo_Size * 2 - space);
+    [path moveToPoint:CGPointMake(x + self.height/6 * 2 - space , y + space)];
+    CGPoint p2 = CGPointMake(x + space, y + self.height/6 * 2 - space);
     [path addLineToPoint:p2];
     
     //新建图层——绘制上述路径
@@ -104,8 +132,7 @@
     
 }
 
-- (void)initPathForWaringShapeLayer
-{
+- (void)initPathForWaringShapeLayer {
     CAShapeLayer * showLayer = [self layerConfig];
     
     
@@ -114,15 +141,15 @@
     path.lineJoinStyle = kCGLineJoinRound;
     
     //绘制三角形
-    CGFloat x = _logoView.frame.size.width/2;
-    CGFloat y = Logo_Size / 2.0;
+    CGFloat x = self.width/2;
+    CGFloat y = self.height/6 / 2.0;
     //三角形起点（上方）
     [path moveToPoint:CGPointMake(x, y)];
     //左边
-    CGPoint p1 = CGPointMake(x - Logo_Size , x * 0.8);
+    CGPoint p1 = CGPointMake(x - self.height/6 , x * 0.8);
     [path addLineToPoint:p1];
     //右边
-    CGPoint p2 = CGPointMake(x + Logo_Size , x * 0.8);
+    CGPoint p2 = CGPointMake(x + self.height/6 , x * 0.8);
     [path addLineToPoint:p2];
     //关闭路径
     [path closePath];
@@ -140,6 +167,5 @@
     showLayer.path = path.CGPath;
     [_showLayerArray addObject:showLayer];
 }
-er
 
 @end

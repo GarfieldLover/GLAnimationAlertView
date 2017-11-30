@@ -16,7 +16,5 @@ FOUNDATION_EXPORT const unsigned char GLAnimationAlertViewVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <GLAnimationAlertView/PublicHeader.h>
 
-
-#import "UIView+Sizes.h"
-#import "WKAlertView.h"
+#import <GLAnimationAlertView/GLAlertView.h>
 

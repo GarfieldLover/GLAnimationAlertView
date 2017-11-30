@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GLAnimationAlertView/GLAnimationAlertView.h"
 
 @interface ViewController ()
 
@@ -17,8 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //3种状态
+
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [GLAlertView showAlertViewWithStyle:GLAlertViewStyleSuccess title:@"标题标题标题标题标题标题标题标题" detail:@"详情详情详情详情详情详情详情详情详情详情详情详情" canleButtonTitle:@"can" okButtonTitle:@"ok"];
+    
+    //3种状态
 }
 
 

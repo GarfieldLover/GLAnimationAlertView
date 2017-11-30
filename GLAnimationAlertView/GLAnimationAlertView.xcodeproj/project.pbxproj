@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5832FB1C1FCEB3C200B7BFD5 /* GLAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5832FB1A1FCEB3C200B7BFD5 /* GLAlertView.h */; };
+		5832FB1C1FCEB3C200B7BFD5 /* GLAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5832FB1A1FCEB3C200B7BFD5 /* GLAlertView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5832FB1D1FCEB3C200B7BFD5 /* GLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5832FB1B1FCEB3C200B7BFD5 /* GLAlertView.m */; };
-		5832FB281FCEB8C000B7BFD5 /* GLAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5832FB261FCEB8C000B7BFD5 /* GLAnimationView.h */; };
+		5832FB281FCEB8C000B7BFD5 /* GLAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5832FB261FCEB8C000B7BFD5 /* GLAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5832FB291FCEB8C000B7BFD5 /* GLAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5832FB271FCEB8C000B7BFD5 /* GLAnimationView.m */; };
+		584A83401FD02486003B283B /* GLAnimationAlertViewDefine.h in Headers */ = {isa = PBXBuildFile; fileRef = 584A833F1FD02486003B283B /* GLAnimationAlertViewDefine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		58CD76B11FCC203300EF00BE /* GLAnimationAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 58CD76AF1FCC203300EF00BE /* GLAnimationAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		58CD76DD1FCC211800EF00BE /* UIView+Sizes.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CD76D91FCC211800EF00BE /* UIView+Sizes.m */; };
-		58CD76E01FCC211800EF00BE /* UIView+Sizes.h in Headers */ = {isa = PBXBuildFile; fileRef = 58CD76DC1FCC211800EF00BE /* UIView+Sizes.h */; };
+		58CD76E01FCC211800EF00BE /* UIView+Sizes.h in Headers */ = {isa = PBXBuildFile; fileRef = 58CD76DC1FCC211800EF00BE /* UIView+Sizes.h */; settings = {ATTRIBUTES = (Private, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		5832FB1B1FCEB3C200B7BFD5 /* GLAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLAlertView.m; sourceTree = "<group>"; };
 		5832FB261FCEB8C000B7BFD5 /* GLAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLAnimationView.h; sourceTree = "<group>"; };
 		5832FB271FCEB8C000B7BFD5 /* GLAnimationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLAnimationView.m; sourceTree = "<group>"; };
+		584A833F1FD02486003B283B /* GLAnimationAlertViewDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLAnimationAlertViewDefine.h; sourceTree = "<group>"; };
 		58CD76AC1FCC203300EF00BE /* GLAnimationAlertView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GLAnimationAlertView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58CD76AF1FCC203300EF00BE /* GLAnimationAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLAnimationAlertView.h; sourceTree = "<group>"; };
 		58CD76B01FCC203300EF00BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				5832FB1B1FCEB3C200B7BFD5 /* GLAlertView.m */,
 				5832FB261FCEB8C000B7BFD5 /* GLAnimationView.h */,
 				5832FB271FCEB8C000B7BFD5 /* GLAnimationView.m */,
+				584A833F1FD02486003B283B /* GLAnimationAlertViewDefine.h */,
 				58CD76B01FCC203300EF00BE /* Info.plist */,
 			);
 			path = GLAnimationAlertView;
@@ -78,9 +81,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5832FB281FCEB8C000B7BFD5 /* GLAnimationView.h in Headers */,
+				58CD76B11FCC203300EF00BE /* GLAnimationAlertView.h in Headers */,
+				584A83401FD02486003B283B /* GLAnimationAlertViewDefine.h in Headers */,
 				58CD76E01FCC211800EF00BE /* UIView+Sizes.h in Headers */,
 				5832FB1C1FCEB3C200B7BFD5 /* GLAlertView.h in Headers */,
-				58CD76B11FCC203300EF00BE /* GLAnimationAlertView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +278,7 @@
 		58CD76B51FCC203300EF00BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -293,6 +298,7 @@
 		58CD76B61FCC203300EF00BE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
