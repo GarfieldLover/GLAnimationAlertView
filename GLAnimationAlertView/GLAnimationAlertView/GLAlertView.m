@@ -10,9 +10,9 @@
 #import "GLAnimationView.h"
 #import "UIView+Sizes.h"
 
-static const NSInteger titleLabelSize = 20;
-static const NSInteger detailLabelSize = 20;
-static const NSInteger buttonSize = 20;
+static const NSInteger titleLabelSize = 16;
+static const NSInteger detailLabelSize = 12;
+static const NSInteger buttonSize = 12;
 
 @interface GLAlertView ()
 
@@ -39,12 +39,10 @@ static const NSInteger buttonSize = 20;
     
     alertView.style = style;
     alertView.animationView.style = style;
-    [alertView.animationView isShowLayer:YES];
     [alertView.okButton setTitle:ok forState:UIControlStateNormal];
     [alertView.cancelButton setTitle:canle forState:UIControlStateNormal];
     alertView.titleLabel.text = title;
     alertView.detailLabel.text = detail;
-    [alertView isShowControls:YES];
     [alertView show];
     
     return alertView;
@@ -86,31 +84,35 @@ static const NSInteger buttonSize = 20;
     CGFloat y = self.animationView.top;
     CGFloat height = self.animationView.height;
     CGFloat width = self.animationView.width;
-    
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x ,y + height / 2, width, titleLabelSize)];
+    CGFloat XMargin = self.animationView.width/12.0f;
+    CGFloat YMargin = 5;
+
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x+XMargin ,y + height / 2, width-XMargin*2, titleLabelSize)];
     [self.titleLabel setFont:[UIFont systemFontOfSize:titleLabelSize]];
     [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
     
-    self.detailLabel  = [[UILabel alloc] initWithFrame:CGRectMake(x ,_titleLabel.bottom + 5, width, detailLabelSize)];
+    self.detailLabel  = [[UILabel alloc] initWithFrame:CGRectMake(x+XMargin , self.titleLabel.bottom + YMargin, width-XMargin*2, detailLabelSize)];
     self.detailLabel.textColor = [UIColor grayColor];
     [self.detailLabel setFont:[UIFont systemFontOfSize:detailLabelSize]];
     [self.detailLabel setTextAlignment:NSTextAlignmentCenter];
     
-    CGFloat centerY = self.detailLabel.center.y + 20;
-    
+    YMargin = 10;
     self.okButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.okButton.layer.cornerRadius = 5;
     self.okButton.titleLabel.font = [UIFont systemFontOfSize:buttonSize];
-    self.okButton.center = CGPointMake(self.detailLabel.center.x + 50, centerY);
-    self.okButton.bounds = CGRectMake(0, 0, width/2, height/4);
-    
-    
+    self.okButton.bounds = CGRectMake(0, 0, width/3, height/7);
+    self.okButton.top = self.detailLabel.bottom + YMargin;
+    self.okButton.left = x+width/10.0f;
+    self.okButton.layer.cornerRadius = 5;
+    self.okButton.backgroundColor = [UIColor colorWithRed:20/255.0 green:20/255.0 blue:255/255.0 alpha:1];
+
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.cancelButton.center = CGPointMake(self.detailLabel.center.x - 50, centerY);
-    self.cancelButton.bounds = CGRectMake(0, 0, width/2, height/4);
-    self.cancelButton.layer.cornerRadius = 5;
     self.cancelButton.titleLabel.font = [UIFont systemFontOfSize:buttonSize];
-    
+    self.cancelButton.bounds = CGRectMake(0, 0, width/3, height/7);
+    self.cancelButton.top = self.detailLabel.bottom + YMargin;
+    self.cancelButton.right = self.animationView.right - width/10.0f;
+    self.cancelButton.layer.cornerRadius = 5;
+    self.cancelButton.backgroundColor = [UIColor colorWithRed:255/255.0 green:20/255.0 blue:20/255.0 alpha:1];
+
     [self addSubview:self.titleLabel];
     [self addSubview:self.detailLabel];
     [self addSubview:self.okButton];
@@ -120,19 +122,23 @@ static const NSInteger buttonSize = 20;
     [self.cancelButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)show
-{
+- (void)show {
+    if (self.superview){
+        return;
+    }
     [[UIApplication sharedApplication].keyWindow addSubview:self];
+    [self isShowControls:YES];
+    [self.animationView isShowLayer:YES];
 }
 
-- (void)hide
-{
+- (void)hide {
+    if (!self.superview){
+        return;
+    }
+    
     [self.animationView isShowLayer:NO];
     [self isShowControls:NO];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.55 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self removeFromSuperview];
-        self.hidden = YES;
-    });
+    [self removeFromSuperview];
 }
 
 - (void)isShowControls:(BOOL)show
@@ -144,22 +150,12 @@ static const NSInteger buttonSize = 20;
         self.detailLabel.alpha = alpha;
         self.okButton.alpha = alpha;
         self.cancelButton.alpha = alpha;
-    } ];
+    }];
 }
 
 
-- (void)buttonClick:(UIButton *)sender
-{
+- (void)buttonClick:(UIButton *)sender {
     [self hide];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.hidden = YES;
-        //        else if(_clickBlock != nil)
-        //        {
-        //            self.clickBlock(sender.tag - TAG);
-        //        }
-    });
-    
 }
 
 

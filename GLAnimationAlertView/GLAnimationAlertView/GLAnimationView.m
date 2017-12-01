@@ -21,44 +21,43 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.bounds = CGRectMake(0, 0, 100, 100);
-        self.backgroundColor = [UIColor whiteColor];
-        self.layer.cornerRadius = 10;
-        self.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.layer.shadowOffset = CGSizeMake(0, 5);
-        self.layer.shadowOpacity = 0.3f;
-        self.layer.shadowRadius = 10.0f;
-        
-        [self layerInit];
+        [self setupUI];
+        [self setupLayers];
     }
     return self;
 }
 
-- (void)isShowLayer:(BOOL)show
-{
-    
-        //strokeEnd
-        //通过对from，to赋值，可让贝塞尔动画从终点至起点，或起点至终点
-        NSNumber * from = show ? @0 : @1;
-        NSNumber * to = show ? @1 : @0;
-    
-        [self.layer removeAllAnimations];
-        [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:NSStringFromSelector(@selector(strokeEnd))];
-        animation.fromValue = from;
-        animation.toValue = to;
-        animation.duration = 0.5;
-        NSUInteger index = (NSUInteger)self.style;
-        CAShapeLayer * layer = [_showLayerArray objectAtIndex:index];
-        [layer addAnimation:animation forKey:NSStringFromSelector(@selector(strokeEnd))];
-        [self.layer addSublayer:layer];
+- (void)setupUI {
+    self.bounds = CGRectMake(0, 0, [UIApplication sharedApplication].keyWindow.width/3.0f, [UIApplication sharedApplication].keyWindow.width/3.0f);
+    self.backgroundColor = [UIColor whiteColor];
+    self.layer.cornerRadius = self.width/10.0f;
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowOffset = CGSizeMake(0, 2.5f);
+    self.layer.shadowOpacity = 0.25f;
+    self.layer.shadowRadius = self.layer.cornerRadius;
 }
 
-
-- (void)layerInit {
-    self.showLayerArray = [NSMutableArray new];
+- (void)isShowLayer:(BOOL)show {
     
-    [self.showLayerArray removeAllObjects];
+    //strokeEnd
+    //通过对from，to赋值，可让贝塞尔动画从终点至起点，或起点至终点
+    NSNumber * from = show ? @0 : @1;
+    NSNumber * to = show ? @1 : @0;
+    
+    [self.layer removeAllAnimations];
+    [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:NSStringFromSelector(@selector(strokeEnd))];
+    animation.fromValue = from;
+    animation.toValue = to;
+    animation.duration = 0.5;
+    NSUInteger index = (NSUInteger)self.style;
+    CAShapeLayer * layer = [_showLayerArray objectAtIndex:index];
+    [layer addAnimation:animation forKey:NSStringFromSelector(@selector(strokeEnd))];
+    [self.layer addSublayer:layer];
+}
+
+- (void)setupLayers {
+    self.showLayerArray = [NSMutableArray new];
     
     [self initPathForRightShapeLayer];
     [self initPathForWrongShapeLayer];
@@ -99,7 +98,7 @@
     showLayer.strokeColor = [UIColor greenColor].CGColor;
     showLayer.path = path.CGPath;
     
-    [_showLayerArray addObject:showLayer];
+    [self.showLayerArray addObject:showLayer];
 }
 
 - (void)initPathForWrongShapeLayer {
@@ -128,7 +127,7 @@
     //新建图层——绘制上述路径
     showLayer.strokeColor = [UIColor redColor].CGColor;
     showLayer.path = path.CGPath;
-    [_showLayerArray addObject:showLayer];
+    [self.showLayerArray addObject:showLayer];
     
 }
 
@@ -165,7 +164,7 @@
     //新建图层——绘制上述路径
     showLayer.strokeColor = [UIColor orangeColor].CGColor;
     showLayer.path = path.CGPath;
-    [_showLayerArray addObject:showLayer];
+    [self.showLayerArray addObject:showLayer];
 }
 
 @end
