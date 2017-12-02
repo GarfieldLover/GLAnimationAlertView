@@ -31,6 +31,12 @@
     [GLAlertView showAlertViewWithStyle:GLAlertViewStyleWaring title:@"支付错误" detail:@"请查看支付详情" canleButtonTitle:@"取消" okButtonTitle:@"确定"];
 }
 
+- (IBAction)showLoading:(id)sender {
+    [GLAlertView showAlertViewWithStyle:GLAlertViewStyleWaring title:@"支付错误" detail:@"请查看支付详情" canleButtonTitle:@"取消" okButtonTitle:@"确定"];
+}
+- (IBAction)showProgress:(id)sender {
+    [GLAlertView showAlertViewWithStyle:GLAlertViewStyleWaring title:@"支付错误" detail:@"请查看支付详情" canleButtonTitle:@"取消" okButtonTitle:@"确定"];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

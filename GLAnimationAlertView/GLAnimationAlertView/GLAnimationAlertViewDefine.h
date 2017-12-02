@@ -20,7 +20,10 @@
 typedef NS_ENUM(NSInteger, GLAlertViewStyle) {
     GLAlertViewStyleSuccess,
     GLAlertViewStyleFail,
-    GLAlertViewStyleWaring
+    GLAlertViewStyleWaring,
+    GLAlertViewStyleLoading,
+    GLAlertViewStyleProgress
+
 };
 
 

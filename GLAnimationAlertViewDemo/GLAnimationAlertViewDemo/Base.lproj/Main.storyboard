@@ -19,48 +19,75 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sqP-Bb-ZjM">
-                                <rect key="frame" x="116" y="148" width="142" height="52"/>
+                                <rect key="frame" x="116" y="56" width="142" height="52"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="t85-RV-fus"/>
+                                    <constraint firstAttribute="height" constant="52" id="kN8-Ci-7bi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="成功"/>
+                                <state key="normal" title="Success"/>
                                 <connections>
                                     <action selector="showSuccess:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Khj-e1-Lwg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpQ-04-Lih">
-                                <rect key="frame" x="116" y="246" width="142" height="52"/>
+                                <rect key="frame" x="116" y="116" width="142" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="Pgs-kS-qKB"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="失败"/>
+                                <state key="normal" title="Fail"/>
                                 <connections>
                                     <action selector="showFail:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zU2-yL-3LF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMC-iY-rcM">
-                                <rect key="frame" x="116" y="343" width="142" height="42"/>
+                                <rect key="frame" x="116" y="176" width="142" height="52"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="kIA-To-wcx"/>
+                                    <constraint firstAttribute="height" constant="52" id="hkq-g1-01j"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="警告"/>
+                                <state key="normal" title="Warning"/>
                                 <connections>
                                     <action selector="showWaring:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jAe-Dg-7vg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGr-lM-vw9">
+                                <rect key="frame" x="116" y="236" width="142" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="0YX-hg-qwC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Loading"/>
+                                <connections>
+                                    <action selector="showLoading:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B9B-YD-i9t"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4D7-BB-y1o">
+                                <rect key="frame" x="116" y="306" width="142" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Progress"/>
+                                <connections>
+                                    <action selector="showProgress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qWo-nV-mQ4"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="DpQ-04-Lih" firstAttribute="trailing" secondItem="WMC-iY-rcM" secondAttribute="trailing" id="4eu-cb-QvO"/>
-                            <constraint firstItem="DpQ-04-Lih" firstAttribute="top" secondItem="sqP-Bb-ZjM" secondAttribute="bottom" constant="46" id="52H-gB-CVc"/>
-                            <constraint firstItem="DpQ-04-Lih" firstAttribute="leading" secondItem="WMC-iY-rcM" secondAttribute="leading" id="Fku-uB-dYp"/>
-                            <constraint firstItem="sqP-Bb-ZjM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="128" id="Obo-9b-CEb"/>
-                            <constraint firstItem="sqP-Bb-ZjM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Pcp-Sp-bSN"/>
-                            <constraint firstItem="sqP-Bb-ZjM" firstAttribute="leading" secondItem="DpQ-04-Lih" secondAttribute="leading" id="PjT-Zd-S8b"/>
-                            <constraint firstItem="sqP-Bb-ZjM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="116" id="b6J-Zp-IFL"/>
-                            <constraint firstItem="sqP-Bb-ZjM" firstAttribute="trailing" secondItem="DpQ-04-Lih" secondAttribute="trailing" id="ba4-yJ-tLU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="WMC-iY-rcM" secondAttribute="bottom" constant="282" id="oAC-c8-GR9"/>
-                            <constraint firstItem="WMC-iY-rcM" firstAttribute="top" secondItem="DpQ-04-Lih" secondAttribute="bottom" constant="45" id="zX7-Pb-jfV"/>
+                            <constraint firstItem="4D7-BB-y1o" firstAttribute="top" secondItem="LGr-lM-vw9" secondAttribute="bottom" constant="18" id="Cw2-aZ-DKA"/>
+                            <constraint firstItem="LGr-lM-vw9" firstAttribute="top" secondItem="WMC-iY-rcM" secondAttribute="bottom" constant="8" symbolic="YES" id="Db9-gd-Lru"/>
+                            <constraint firstItem="LGr-lM-vw9" firstAttribute="trailing" secondItem="4D7-BB-y1o" secondAttribute="trailing" id="Jq9-WY-hg1"/>
+                            <constraint firstItem="sqP-Bb-ZjM" firstAttribute="trailing" secondItem="DpQ-04-Lih" secondAttribute="trailing" id="KZk-Or-UTu"/>
+                            <constraint firstItem="DpQ-04-Lih" firstAttribute="trailing" secondItem="WMC-iY-rcM" secondAttribute="trailing" id="Ls6-Dm-bEq"/>
+                            <constraint firstItem="sqP-Bb-ZjM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="36" id="O6C-56-h2a"/>
+                            <constraint firstItem="WMC-iY-rcM" firstAttribute="top" secondItem="DpQ-04-Lih" secondAttribute="bottom" constant="8" symbolic="YES" id="PP2-0l-MeK"/>
+                            <constraint firstItem="WMC-iY-rcM" firstAttribute="trailing" secondItem="LGr-lM-vw9" secondAttribute="trailing" id="W2r-2a-7YY"/>
+                            <constraint firstItem="DpQ-04-Lih" firstAttribute="leading" secondItem="WMC-iY-rcM" secondAttribute="leading" id="dFG-ib-IxB"/>
+                            <constraint firstItem="sqP-Bb-ZjM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="116" id="hPA-AI-hzY"/>
+                            <constraint firstItem="DpQ-04-Lih" firstAttribute="top" secondItem="sqP-Bb-ZjM" secondAttribute="bottom" constant="8" symbolic="YES" id="hg7-Mi-YZP"/>
+                            <constraint firstItem="sqP-Bb-ZjM" firstAttribute="leading" secondItem="DpQ-04-Lih" secondAttribute="leading" id="t0U-Wv-1LA"/>
+                            <constraint firstItem="WMC-iY-rcM" firstAttribute="leading" secondItem="LGr-lM-vw9" secondAttribute="leading" id="u1u-L8-dGY"/>
+                            <constraint firstItem="LGr-lM-vw9" firstAttribute="leading" secondItem="4D7-BB-y1o" secondAttribute="leading" id="uIW-Qg-2g8"/>
+                            <constraint firstItem="sqP-Bb-ZjM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="z68-l6-MCy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
