@@ -61,13 +61,13 @@
 			isa = PBXGroup;
 			children = (
 				58CD76AF1FCC203300EF00BE /* GLAnimationAlertView.h */,
-				58CD76DC1FCC211800EF00BE /* UIView+Sizes.h */,
-				58CD76D91FCC211800EF00BE /* UIView+Sizes.m */,
+				584A833F1FD02486003B283B /* GLAnimationAlertViewDefine.h */,
 				5832FB1A1FCEB3C200B7BFD5 /* GLAlertView.h */,
 				5832FB1B1FCEB3C200B7BFD5 /* GLAlertView.m */,
 				5832FB261FCEB8C000B7BFD5 /* GLAnimationView.h */,
 				5832FB271FCEB8C000B7BFD5 /* GLAnimationView.m */,
-				584A833F1FD02486003B283B /* GLAnimationAlertViewDefine.h */,
+				58CD76DC1FCC211800EF00BE /* UIView+Sizes.h */,
+				58CD76D91FCC211800EF00BE /* UIView+Sizes.m */,
 				58CD76B01FCC203300EF00BE /* Info.plist */,
 			);
 			path = GLAnimationAlertView;
