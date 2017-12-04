@@ -14,6 +14,6 @@
 
 @property (nonatomic, assign) GLAlertViewStyle style;
 
-- (void)isShowLayer:(BOOL)show;
+- (void)showAnimation:(BOOL)show;
 
 @end

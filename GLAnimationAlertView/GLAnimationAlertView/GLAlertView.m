@@ -76,7 +76,7 @@ static const NSInteger buttonSize = 12;
 - (void)setupAnimationView {
     self.animationView = [GLAnimationView new];
     self.animationView.center = self.center;
-    [self addSubview:self.animationView];
+    [self addSubview:self.animationView]; 
 }
 
 - (void)setupControls {
@@ -128,7 +128,7 @@ static const NSInteger buttonSize = 12;
     }
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     [self isShowControls:YES];
-    [self.animationView isShowLayer:YES];
+    [self.animationView showAnimation:YES];
 }
 
 - (void)hide {
@@ -136,7 +136,7 @@ static const NSInteger buttonSize = 12;
         return;
     }
     
-    [self.animationView isShowLayer:NO];
+    [self.animationView showAnimation:NO];
     [self isShowControls:NO];
     [self removeFromSuperview];
 }
