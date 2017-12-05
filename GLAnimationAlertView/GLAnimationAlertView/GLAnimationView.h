@@ -16,4 +16,6 @@
 
 - (void)showAnimation:(BOOL)show;
 
+- (void)setProgress:(CGFloat)progress;
+
 @end

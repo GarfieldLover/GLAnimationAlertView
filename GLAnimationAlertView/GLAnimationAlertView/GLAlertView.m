@@ -16,6 +16,7 @@ static const NSInteger buttonSize = 12;
 
 @interface GLAlertView ()
 
+@property (nonatomic, strong) UIView* backgroundView;
 @property (nonatomic, strong) GLAnimationView* animationView;
 @property (nonatomic, strong) UILabel* titleLabel;
 @property (nonatomic, strong) UILabel* detailLabel;
@@ -28,6 +29,11 @@ static const NSInteger buttonSize = 12;
 
 @implementation GLAlertView
 
++ (void)setProgress:(CGFloat)progress {
+    GLAlertView* alertView =  [GLAlertView sharedAlertView];
+    
+    [alertView.animationView setProgress:progress];
+}
 
 + (instancetype)showAlertViewWithStyle:(GLAlertViewStyle)style
                                  title:(NSString *)title
@@ -69,22 +75,37 @@ static const NSInteger buttonSize = 12;
     self.frame = [UIApplication sharedApplication].keyWindow.frame;
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
+    [self setupBackgroundView];
     [self setupAnimationView];
     [self setupControls];
 }
 
+- (void)setupBackgroundView {
+    UIView* backgroundView = [UIView new];
+    backgroundView.bounds = CGRectMake(0, 0, [UIApplication sharedApplication].keyWindow.width/3.0f, [UIApplication sharedApplication].keyWindow.width/3.0f);
+    backgroundView.backgroundColor = [UIColor whiteColor];
+    backgroundView.layer.cornerRadius = backgroundView.width/10.0f;
+    backgroundView.layer.shadowColor = [UIColor blackColor].CGColor;
+    backgroundView.layer.shadowOffset = CGSizeMake(0, 2.5f);
+    backgroundView.layer.shadowOpacity = 0.25f;
+    backgroundView.layer.shadowRadius = backgroundView.layer.cornerRadius;
+    backgroundView.center = self.center;
+    self.backgroundView = backgroundView;
+    
+    [self addSubview:backgroundView];
+}
+
 - (void)setupAnimationView {
-    self.animationView = [GLAnimationView new];
-    self.animationView.center = self.center;
-    [self addSubview:self.animationView]; 
+    self.animationView = [[GLAnimationView alloc] initWithFrame:CGRectMake(self.backgroundView.width/4 + 10, 10, self.backgroundView.width/2 -10*2, self.backgroundView.height/2 -10*2)];
+    [self.backgroundView addSubview:self.animationView];
 }
 
 - (void)setupControls {
-    CGFloat x = self.animationView.left;
-    CGFloat y = self.animationView.top;
-    CGFloat height = self.animationView.height;
-    CGFloat width = self.animationView.width;
-    CGFloat XMargin = self.animationView.width/12.0f;
+    CGFloat x = self.backgroundView.left;
+    CGFloat y = self.backgroundView.top;
+    CGFloat height = self.backgroundView.height;
+    CGFloat width = self.backgroundView.width;
+    CGFloat XMargin = self.backgroundView.width/12.0f;
     CGFloat YMargin = 5;
 
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x+XMargin ,y + height / 2, width-XMargin*2, titleLabelSize)];
@@ -109,7 +130,7 @@ static const NSInteger buttonSize = 12;
     self.cancelButton.titleLabel.font = [UIFont systemFontOfSize:buttonSize];
     self.cancelButton.bounds = CGRectMake(0, 0, width/3, height/7);
     self.cancelButton.top = self.detailLabel.bottom + YMargin;
-    self.cancelButton.right = self.animationView.right - width/10.0f;
+    self.cancelButton.right = self.backgroundView.right - width/10.0f;
     self.cancelButton.layer.cornerRadius = 5;
     self.cancelButton.backgroundColor = [UIColor colorWithRed:255/255.0 green:20/255.0 blue:20/255.0 alpha:1];
 

@@ -9,7 +9,9 @@
 #import "ViewController.h"
 #import "GLAnimationAlertView/GLAnimationAlertView.h"
 
-@interface ViewController ()
+@interface ViewController (){
+    CGFloat currentProgress;
+}
 
 @end
 
@@ -32,10 +34,24 @@
 }
 
 - (IBAction)showLoading:(id)sender {
-    [GLAlertView showAlertViewWithStyle:GLAlertViewStyleLoading title:@"支付错误" detail:@"请查看支付详情" canleButtonTitle:@"取消" okButtonTitle:@"确定"];
+    [GLAlertView showAlertViewWithStyle:GLAlertViewStyleLoading title:@"支付等待" detail:@"请查看支付详情" canleButtonTitle:@"取消" okButtonTitle:@"确定"];
 }
+
 - (IBAction)showProgress:(id)sender {
-    [GLAlertView showAlertViewWithStyle:GLAlertViewStyleProgress title:@"支付错误" detail:@"请查看支付详情" canleButtonTitle:@"取消" okButtonTitle:@"确定"];
+    [GLAlertView showAlertViewWithStyle:GLAlertViewStyleProgress title:@"支付进度" detail:@"请查看支付详情" canleButtonTitle:@"取消" okButtonTitle:@"确定"];
+    
+    if (currentProgress>1.0f) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        return;
+    }
+    
+    currentProgress+=0.04f;
+    [GLAlertView setProgress:currentProgress];
+    [self performSelector:@selector(showProgress:) withObject:sender afterDelay:.04];
+}
+
+- (IBAction)showSOHULoading:(id)sender {
+    [GLAlertView showAlertViewWithStyle:GLAlertViewStyleLoading title:@"支付等待" detail:@"请查看支付详情" canleButtonTitle:@"取消" okButtonTitle:@"确定"];
 }
 
 - (void)didReceiveMemoryWarning {

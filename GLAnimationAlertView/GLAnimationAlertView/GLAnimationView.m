@@ -13,28 +13,16 @@
 
 @property (nonatomic, strong) NSMutableArray* showLayerArray;
 
-
 @end
 
 @implementation GLAnimationView
 
-- (instancetype)init {
-    self = [super init];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
-        [self setupUI];
         [self setupLayers];
     }
     return self;
-}
-
-- (void)setupUI {
-    self.bounds = CGRectMake(0, 0, [UIApplication sharedApplication].keyWindow.width/3.0f, [UIApplication sharedApplication].keyWindow.width/3.0f);
-    self.backgroundColor = [UIColor whiteColor];
-    self.layer.cornerRadius = self.width/10.0f;
-    self.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.layer.shadowOffset = CGSizeMake(0, 2.5f);
-    self.layer.shadowOpacity = 0.25f;
-    self.layer.shadowRadius = self.layer.cornerRadius;
 }
 
 - (void)setupLayers {
@@ -44,13 +32,13 @@
     [self initFailLayer];
     [self initWaringLayer];
     [self initLoadingLayer];
-    //    [self initProgressLayer];
+    [self initProgressLayer];
 }
 
 - (void)showAnimation:(BOOL)show {
     [self.layer removeAllAnimations];
     [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-
+    
     NSUInteger index = (NSUInteger)self.style;
     CAShapeLayer* layer = [self.showLayerArray objectAtIndex:index];
     
@@ -113,19 +101,17 @@
             NSNumber* from = show ? @0 : @1;
             NSNumber* to = show ? @1 : @0;
             
-            CABasicAnimation *animation = [CABasicAnimation animation];
+            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
             animation.fromValue = from;
             animation.toValue = to;
             animation.duration = 0.8;
-            [layer addAnimation:animation forKey:NSStringFromSelector(@selector(strokeEnd))];
+            [layer addAnimation:animation forKey:@"strokeEnd"];
         }
             
         default:
             break;
     }
-    layer.anchorPoint = CGPointMake(0.5, 0.5);
-    layer.frame = self.bounds;
-
+    
     [self.layer addSublayer:layer];
 }
 
@@ -141,21 +127,21 @@
 - (void)initSuccessLayer {
     CAShapeLayer* showLayer = [self layerConfig];
     
-    CGPoint pathCenter = CGPointMake(self.width/2, self.width/4);
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:pathCenter radius:self.width/6 startAngle:0 endAngle:M_PI*2 clockwise:YES];
+    CGPoint pathCenter = CGPointMake(self.width/2, self.height/2);
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:pathCenter radius:self.width/2 startAngle:-M_PI_2 endAngle:M_PI+M_PI_2 clockwise:YES];
     path.lineCapStyle = kCGLineCapSquare;
     path.lineJoinStyle = kCGLineJoinBevel;
-    pathCenter.x -= 3;
+    pathCenter.x -= 1;
     
-    CGFloat x = pathCenter.x * 0.88;
-    CGFloat y = pathCenter.y * 1.13;
+    CGFloat x = pathCenter.x * 0.6;
+    CGFloat y = pathCenter.y * 1.1;
     //勾的起点
     [path moveToPoint:CGPointMake(x, y)];
     //勾的最底端
-    CGPoint p1 = CGPointMake(pathCenter.x, pathCenter.y * 1.3);
+    CGPoint p1 = CGPointMake(pathCenter.x, pathCenter.y * 1.4);
     [path addLineToPoint:p1];
     //勾的最上端
-    CGPoint p2 = CGPointMake(pathCenter.x * 1.2, pathCenter.y * 0.8);
+    CGPoint p2 = CGPointMake(pathCenter.x * 1.6, pathCenter.y * 0.7);
     [path addLineToPoint:p2];
     //新建图层——绘制上面的圆圈和勾
     showLayer.strokeColor = [UIColor greenColor].CGColor;
@@ -167,22 +153,19 @@
 - (void)initFailLayer {
     CAShapeLayer * showLayer = [self layerConfig];
     
-    CGFloat x = self.width/2 - self.width/6;
-    CGFloat y = self.width/6/2;
-    
     //圆角矩形
-    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(x, y, self.width/6 * 2, self.width/6 * 2) cornerRadius:5];
+    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:5];
     path.lineCapStyle = kCGLineCapSquare;
     path.lineJoinStyle = kCGLineJoinBevel;
     
-    CGFloat space = self.width/6/2;
+    CGFloat space = self.width/6;
     //斜线1
-    [path moveToPoint:CGPointMake(x + space, y + space)];
-    CGPoint p1 = CGPointMake(x + self.width/6 * 2 - space, y + self.width/6 * 2 - space);
+    [path moveToPoint:CGPointMake(space, space)];
+    CGPoint p1 = CGPointMake(self.width - space, self.height - space);
     [path addLineToPoint:p1];
     //斜线2
-    [path moveToPoint:CGPointMake(x + self.width/6 * 2 - space , y + space)];
-    CGPoint p2 = CGPointMake(x + space, y + self.width/6 * 2 - space);
+    [path moveToPoint:CGPointMake(self.width - space , space)];
+    CGPoint p2 = CGPointMake(space, self.height - space);
     [path addLineToPoint:p2];
     
     //新建图层——绘制上述路径
@@ -201,15 +184,14 @@
     
     //绘制三角形
     CGFloat x = self.width/2;
-    CGFloat y = self.width/6/2;
-    CGFloat y_buttom = self.width/2;
+    CGFloat y_buttom = self.height;
     //三角形起点（上方）
-    [path moveToPoint:CGPointMake(x, y)];
+    [path moveToPoint:CGPointMake(x, 0)];
     //左边
-    CGPoint p1 = CGPointMake(x - self.width/6 , y_buttom*0.8);
+    CGPoint p1 = CGPointMake(x - self.width/2 , y_buttom);
     [path addLineToPoint:p1];
     //右边
-    CGPoint p2 = CGPointMake(x + self.width/6 , y_buttom*0.8);
+    CGPoint p2 = CGPointMake(x + self.width/2 , y_buttom);
     [path addLineToPoint:p2];
     //关闭路径
     [path closePath];
@@ -217,11 +199,11 @@
     //绘制感叹号
     //绘制直线
     [path moveToPoint:CGPointMake(x, y_buttom*0.3)];
-    CGPoint p4 = CGPointMake(x, y_buttom*0.6);
+    CGPoint p4 = CGPointMake(x, y_buttom*0.7);
     [path addLineToPoint:p4];
     //绘制实心圆
-    [path moveToPoint:CGPointMake(x, y_buttom*0.7)];
-    [path addArcWithCenter:CGPointMake(x, y_buttom*0.7) radius:2 startAngle:0 endAngle:M_PI*2 clockwise:YES];
+    [path moveToPoint:CGPointMake(x, y_buttom*0.8)];
+    [path addArcWithCenter:CGPointMake(x, y_buttom*0.8) radius:2 startAngle:-M_PI_2 endAngle:M_PI+M_PI_2 clockwise:YES];
     //新建图层——绘制上述路径
     showLayer.strokeColor = [UIColor orangeColor].CGColor;
     showLayer.path = path.CGPath;
@@ -234,18 +216,50 @@
     CGFloat x = self.width/2;
     CGFloat y = self.width/2;
     CGFloat radius = self.width/2;
-
     
     CGPoint center = CGPointMake(x, y);
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:0 endAngle:M_PI*2 clockwise:YES];
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:-M_PI_2 endAngle:M_PI+M_PI_2 clockwise:YES];
     path.lineCapStyle = kCGLineCapSquare;
     path.lineJoinStyle = kCGLineJoinBevel;
     
     showLayer.strokeColor = [UIColor greenColor].CGColor;
     showLayer.path = path.CGPath;
-//    showLayer.anchorPoint = CGPointMake(0.5, 0.5);
+    
+    [self.showLayerArray addObject:showLayer];
+    
+    showLayer.anchorPoint = CGPointMake(0.5, 0.5);
+    showLayer.frame = self.bounds;
+}
+
+- (void)initProgressLayer {
+    CAShapeLayer* showLayer = [self layerConfig];
+    CGFloat x = self.width/2;
+    CGFloat y = self.width/2;
+    CGFloat radius = self.width/2;
+    
+    CGPoint center = CGPointMake(x, y);
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:-M_PI_2 endAngle:M_PI+M_PI_2 clockwise:YES];
+    path.lineCapStyle = kCGLineCapSquare;
+    path.lineJoinStyle = kCGLineJoinBevel;
+    
+    showLayer.strokeColor = [UIColor darkGrayColor].CGColor;
+    showLayer.path = path.CGPath;
     
     [self.showLayerArray addObject:showLayer];
 }
+
+- (void)setProgress:(CGFloat)progress {
+    progress = MAX(MIN(progress, 1.0f), 0.0f);
+    
+    CABasicAnimation* pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    pathAnimation.duration = 0.4;
+    pathAnimation.fromValue = @(progress);
+    pathAnimation.toValue = @(1.0f);
+    
+    NSUInteger index = (NSUInteger)self.style;
+    CAShapeLayer* layer = [self.showLayerArray objectAtIndex:index];
+    [layer addAnimation:pathAnimation forKey:@"strokeEnd"];
+}
+
 
 @end

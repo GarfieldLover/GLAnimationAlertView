@@ -18,4 +18,6 @@
                       canleButtonTitle:(NSString *)canle
                          okButtonTitle:(NSString *)ok;
 
++ (void)setProgress:(CGFloat)progress;
+
 @end

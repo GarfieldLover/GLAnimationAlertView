@@ -70,9 +70,18 @@
                                     <action selector="showProgress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qWo-nV-mQ4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RB8-dW-sjF">
+                                <rect key="frame" x="87" y="368" width="200" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="SOHULoading"/>
+                                <connections>
+                                    <action selector="showProgress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ogp-Q0-dJw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="RB8-dW-sjF" firstAttribute="centerX" secondItem="4D7-BB-y1o" secondAttribute="centerX" id="Cd9-SS-DUY"/>
                             <constraint firstItem="4D7-BB-y1o" firstAttribute="top" secondItem="LGr-lM-vw9" secondAttribute="bottom" constant="18" id="Cw2-aZ-DKA"/>
                             <constraint firstItem="LGr-lM-vw9" firstAttribute="top" secondItem="WMC-iY-rcM" secondAttribute="bottom" constant="8" symbolic="YES" id="Db9-gd-Lru"/>
                             <constraint firstItem="LGr-lM-vw9" firstAttribute="trailing" secondItem="4D7-BB-y1o" secondAttribute="trailing" id="Jq9-WY-hg1"/>
@@ -81,9 +90,11 @@
                             <constraint firstItem="sqP-Bb-ZjM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="36" id="O6C-56-h2a"/>
                             <constraint firstItem="WMC-iY-rcM" firstAttribute="top" secondItem="DpQ-04-Lih" secondAttribute="bottom" constant="8" symbolic="YES" id="PP2-0l-MeK"/>
                             <constraint firstItem="WMC-iY-rcM" firstAttribute="trailing" secondItem="LGr-lM-vw9" secondAttribute="trailing" id="W2r-2a-7YY"/>
+                            <constraint firstItem="RB8-dW-sjF" firstAttribute="top" secondItem="4D7-BB-y1o" secondAttribute="bottom" constant="20" id="ZGQ-js-xuy"/>
                             <constraint firstItem="DpQ-04-Lih" firstAttribute="leading" secondItem="WMC-iY-rcM" secondAttribute="leading" id="dFG-ib-IxB"/>
                             <constraint firstItem="sqP-Bb-ZjM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="116" id="hPA-AI-hzY"/>
                             <constraint firstItem="DpQ-04-Lih" firstAttribute="top" secondItem="sqP-Bb-ZjM" secondAttribute="bottom" constant="8" symbolic="YES" id="hg7-Mi-YZP"/>
+                            <constraint firstItem="RB8-dW-sjF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="pKy-E3-cmu"/>
                             <constraint firstItem="sqP-Bb-ZjM" firstAttribute="leading" secondItem="DpQ-04-Lih" secondAttribute="leading" id="t0U-Wv-1LA"/>
                             <constraint firstItem="WMC-iY-rcM" firstAttribute="leading" secondItem="LGr-lM-vw9" secondAttribute="leading" id="u1u-L8-dGY"/>
                             <constraint firstItem="LGr-lM-vw9" firstAttribute="leading" secondItem="4D7-BB-y1o" secondAttribute="leading" id="uIW-Qg-2g8"/>
