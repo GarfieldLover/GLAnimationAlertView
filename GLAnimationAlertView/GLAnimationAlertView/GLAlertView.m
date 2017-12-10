@@ -10,12 +10,13 @@
 #import "GLAnimationView.h"
 #import "UIView+Sizes.h"
 #import "KMActivityIndicator.h"
+#import "MONActivityIndicatorView.h"
 
 static const NSInteger titleLabelSize = 16;
 static const NSInteger detailLabelSize = 12;
 static const NSInteger buttonSize = 12;
 
-@interface GLAlertView ()
+@interface GLAlertView ()<MONActivityIndicatorViewDelegate>
 
 @property (nonatomic, strong) UIView* backgroundView;
 @property (nonatomic, strong) GLAnimationView* animationView;
@@ -80,11 +81,30 @@ static const NSInteger buttonSize = 12;
     [self setupAnimationView];
     [self setupControls];
     
-    KMActivityIndicator* xx =[[KMActivityIndicator alloc] initWithFrame:self.bounds];
-    [self addSubview:xx];
-    [xx startAnimating];
+//    KMActivityIndicator* xx =[[KMActivityIndicator alloc] initWithFrame:self.bounds];
+//    [self addSubview:xx];
+//    [xx startAnimating];
     
+    MONActivityIndicatorView *indicatorView = [[MONActivityIndicatorView alloc] initWithFrame:self.bounds];
+    indicatorView.delegate = self;
+    indicatorView.numberOfCircles = 3;
+    indicatorView.radius = 20;
+    indicatorView.internalSpacing = 3;
+    [indicatorView startAnimating];
+    [self addSubview:indicatorView];
 
+    [indicatorView startAnimating];
+
+
+}
+
+- (UIColor *)activityIndicatorView:(MONActivityIndicatorView *)activityIndicatorView
+      circleBackgroundColorAtIndex:(NSUInteger)index {
+    CGFloat red   = (arc4random() % 256)/255.0;
+    CGFloat green = (arc4random() % 256)/255.0;
+    CGFloat blue  = (arc4random() % 256)/255.0;
+    CGFloat alpha = 1.0f;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
 - (void)setupBackgroundView {
