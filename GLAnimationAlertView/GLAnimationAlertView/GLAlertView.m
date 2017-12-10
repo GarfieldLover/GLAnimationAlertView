@@ -9,6 +9,7 @@
 #import "GLAlertView.h"
 #import "GLAnimationView.h"
 #import "UIView+Sizes.h"
+#import "KMActivityIndicator.h"
 
 static const NSInteger titleLabelSize = 16;
 static const NSInteger detailLabelSize = 12;
@@ -78,6 +79,12 @@ static const NSInteger buttonSize = 12;
     [self setupBackgroundView];
     [self setupAnimationView];
     [self setupControls];
+    
+    KMActivityIndicator* xx =[[KMActivityIndicator alloc] initWithFrame:self.bounds];
+    [self addSubview:xx];
+    [xx startAnimating];
+    
+
 }
 
 - (void)setupBackgroundView {

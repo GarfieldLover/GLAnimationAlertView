@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0290AE1FDD5EEF003BF47D /* KMActivityIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A0290AC1FDD5EEE003BF47D /* KMActivityIndicator.h */; };
+		0A0290AF1FDD5EEF003BF47D /* KMActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0290AD1FDD5EEE003BF47D /* KMActivityIndicator.m */; };
 		5832FB1C1FCEB3C200B7BFD5 /* GLAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5832FB1A1FCEB3C200B7BFD5 /* GLAlertView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5832FB1D1FCEB3C200B7BFD5 /* GLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5832FB1B1FCEB3C200B7BFD5 /* GLAlertView.m */; };
 		5832FB281FCEB8C000B7BFD5 /* GLAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5832FB261FCEB8C000B7BFD5 /* GLAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0290AC1FDD5EEE003BF47D /* KMActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMActivityIndicator.h; sourceTree = "<group>"; };
+		0A0290AD1FDD5EEE003BF47D /* KMActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMActivityIndicator.m; sourceTree = "<group>"; };
 		5832FB1A1FCEB3C200B7BFD5 /* GLAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLAlertView.h; sourceTree = "<group>"; };
 		5832FB1B1FCEB3C200B7BFD5 /* GLAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLAlertView.m; sourceTree = "<group>"; };
 		5832FB261FCEB8C000B7BFD5 /* GLAnimationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLAnimationView.h; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 		58CD76AE1FCC203300EF00BE /* GLAnimationAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				0A0290AC1FDD5EEE003BF47D /* KMActivityIndicator.h */,
+				0A0290AD1FDD5EEE003BF47D /* KMActivityIndicator.m */,
 				58CD76AF1FCC203300EF00BE /* GLAnimationAlertView.h */,
 				584A833F1FD02486003B283B /* GLAnimationAlertViewDefine.h */,
 				5832FB1A1FCEB3C200B7BFD5 /* GLAlertView.h */,
@@ -83,6 +89,7 @@
 				5832FB281FCEB8C000B7BFD5 /* GLAnimationView.h in Headers */,
 				58CD76B11FCC203300EF00BE /* GLAnimationAlertView.h in Headers */,
 				584A83401FD02486003B283B /* GLAnimationAlertViewDefine.h in Headers */,
+				0A0290AE1FDD5EEF003BF47D /* KMActivityIndicator.h in Headers */,
 				58CD76E01FCC211800EF00BE /* UIView+Sizes.h in Headers */,
 				5832FB1C1FCEB3C200B7BFD5 /* GLAlertView.h in Headers */,
 			);
@@ -158,6 +165,7 @@
 			files = (
 				58CD76DD1FCC211800EF00BE /* UIView+Sizes.m in Sources */,
 				5832FB291FCEB8C000B7BFD5 /* GLAnimationView.m in Sources */,
+				0A0290AF1FDD5EEF003BF47D /* KMActivityIndicator.m in Sources */,
 				5832FB1D1FCEB3C200B7BFD5 /* GLAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
